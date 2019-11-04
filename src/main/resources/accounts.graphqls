@@ -1,0 +1,24 @@
+schema {
+    query: Query
+}
+
+type Query {
+    User(numberOfAccounts: String!): User
+}
+
+type User {
+    numberOfAccounts: Float
+    accounts: [Account]
+}
+
+type Account {
+    accountNumber: String
+    currencyCode: String
+    bic: String
+    balance: Balance
+}
+
+type Balance {
+    amount: Float
+    currencyCode: String
+}

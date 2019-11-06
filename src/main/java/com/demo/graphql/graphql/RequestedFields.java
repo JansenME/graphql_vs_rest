@@ -44,7 +44,7 @@ public class RequestedFields {
         return out.toString();
     }
 
-    public boolean contains(final GraphQLFieldName graphQLField) {
+    boolean contains(final GraphQLFieldName graphQLField) {
         return requestedFieldsList.contains(graphQLField);
     }
 }

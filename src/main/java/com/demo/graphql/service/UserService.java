@@ -25,10 +25,10 @@ public class UserService {
         return user;
     }
 
-    public User getUserForGraphQL(final int numberOfAccounts, final boolean getAccounts) {
+    public User getUserForGraphQL(final int numberOfAccounts, final boolean getAccountInformation, final boolean getBalances) {
         User user = UserInformation.getUserInformation();
 
-        if(getAccounts) {
+        if(getAccountInformation) {
             setAccounts(user, numberOfAccounts);
         }
 

@@ -7,15 +7,21 @@ type Query {
 }
 
 type User {
+    userType: String
+    age: Float
     numberOfAccounts: Float
     accounts: [Account]
 }
 
 type Account {
+    accountId: AccountId
+    balance: Balance
+}
+
+type AccountId {
     accountNumber: String
     currencyCode: String
     bic: String
-    balance: Balance
 }
 
 type Balance {

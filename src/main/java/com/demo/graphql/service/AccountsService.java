@@ -1,34 +1,30 @@
 package com.demo.graphql.service;
 
+import com.demo.graphql.backends.AccountInformation;
 import com.demo.graphql.model.Account;
+import com.demo.graphql.model.AccountId;
 import com.demo.graphql.model.Balance;
 import com.demo.graphql.model.User;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
+import java.util.stream.Collectors;
 
 @Service
-@Slf4j
 public class AccountsService {
 
     List<Account> getAccounts(final int numberOfAccounts) {
-        return new User(getAccountsList(numberOfAccounts)).getAccounts();
+        List<AccountId> accountIds = AccountInformation.getAccountIds(numberOfAccounts);
+
+        return new User(getAccountsList(accountIds)).getAccounts();
     }
 
-    private List<Account> getAccountsList(final int numberOfAccounts) {
-        List<Account> accounts = new ArrayList<>();
-
-        IntStream.range(0, numberOfAccounts)
-                .forEach(element -> accounts.add(createOneAccount()));
-
-        return accounts;
+    private List<Account> getAccountsList(final List<AccountId> accountIds) {
+        return accountIds.stream().map(this::createOneAccount).collect(Collectors.toList());
     }
 
-    private Account createOneAccount() {
-        return new Account("NL12RABO0123456789", "EUR", "RABONL2UXXX", new Balance(BigDecimal.TEN, "EUR"));
+    private Account createOneAccount(final AccountId accountId) {
+        return new Account(accountId, new Balance(BigDecimal.TEN, "EUR"));
     }
 }

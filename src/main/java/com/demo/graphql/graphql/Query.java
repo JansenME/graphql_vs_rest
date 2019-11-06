@@ -17,6 +17,8 @@ public class Query implements GraphQLQueryResolver {
     }
 
     public User getUser(final String numberOfAccounts, final DataFetchingEnvironment environment) {
-        return userService.getUser(Integer.valueOf(numberOfAccounts));
+        RequestedFields requestedFields = new RequestedFields(environment);
+
+        return userService.getUserForGraphQL(Integer.valueOf(numberOfAccounts), requestedFields.contains(GraphQLFieldName.BALANCE));
     }
 }

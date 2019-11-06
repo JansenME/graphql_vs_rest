@@ -5,7 +5,8 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Account {
-    private AccountId accountId;
-    private Balance balance;
+public class AccountId {
+    private String accountNumber;
+    private String currencyCode;
+    private String bic;
 }

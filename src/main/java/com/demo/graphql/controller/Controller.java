@@ -18,6 +18,6 @@ public class Controller {
 
     @GetMapping("/rest-accounts")
     public ResponseEntity getAccounts(@RequestParam final int numberOfAccounts) {
-        return ResponseEntity.ok().body(userService.getUser(numberOfAccounts));
+        return ResponseEntity.ok().body(userService.getUserForRest(numberOfAccounts));
     }
 }

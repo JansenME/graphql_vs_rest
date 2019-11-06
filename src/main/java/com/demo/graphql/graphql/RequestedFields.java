@@ -5,6 +5,7 @@ import graphql.schema.DataFetchingEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.StringJoiner;
 import java.util.stream.Stream;
 
@@ -18,14 +19,13 @@ public class RequestedFields {
             throw new GraphQLException("The DataFetchingEnvironment was not correct, therefore we can't check which fields were requested.");
         }
 
-        dataFetchingEnvironment.getSelectionSet().getDefinitions().keySet().forEach(this::add);
+        dataFetchingEnvironment.getSelectionSet().getDefinitions().keySet()
+                .stream()
+                .filter(Objects::nonNull)
+                .forEach(this::add);
     }
 
     private void add(final String fieldNameAsString) {
-        if(fieldNameAsString == null) {
-            throw new GraphQLException("The Key in Definitions in DataFetchingEnvironment was null, therefore we can't check which field was requested.");
-        }
-
         Stream.of(GraphQLFieldName.values()).forEach(fieldName -> addIfFieldNameExists(fieldName, fieldNameAsString));
     }
 

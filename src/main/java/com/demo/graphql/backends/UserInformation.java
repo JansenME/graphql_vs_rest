@@ -9,7 +9,7 @@ import java.util.Random;
 public class UserInformation {
     private static final int MIN_AGE = 18;
     private static final int MAX_AGE = 65;
-    private static final Random random = new Random();
+    private static final Random RANDOM = new Random();
 
     public static User getUserInformation() {
         try {
@@ -22,6 +22,6 @@ public class UserInformation {
     }
 
     private static int getRandomAge() {
-        return random.nextInt((MAX_AGE - MIN_AGE) + 1) + MIN_AGE;
+        return RANDOM.nextInt((MAX_AGE - MIN_AGE) + 1) + MIN_AGE;
     }
 }

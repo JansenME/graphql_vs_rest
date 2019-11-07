@@ -1,26 +1,26 @@
 package com.demo.graphql.service;
 
 import com.demo.graphql.backends.UserInformation;
-import com.demo.graphql.model.Account;
 import com.demo.graphql.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class UserService {
     private AccountsService accountsService;
+    private BalanceService balanceService;
 
     @Autowired
-    public UserService(final AccountsService accountsService) {
+    public UserService(final AccountsService accountsService, final BalanceService balanceService) {
         this.accountsService = accountsService;
+        this.balanceService = balanceService;
     }
 
     public User getUserForRest(final int numberOfAccounts) {
         User user = UserInformation.getUserInformation();
 
         setAccounts(user, numberOfAccounts);
+        setBalances(user);
 
         return user;
     }
@@ -32,12 +32,18 @@ public class UserService {
             setAccounts(user, numberOfAccounts);
         }
 
+        if(getBalances) {
+            setBalances(user);
+        }
+
         return user;
     }
 
     private void setAccounts(final User user, final int numberOfAccounts) {
-        List<Account> accounts = accountsService.getAccounts(numberOfAccounts);
-        user.getAccounts().addAll(accounts);
-        user.setNumberOfAccounts(accounts.size());
+        accountsService.getAccounts(user, numberOfAccounts);
+    }
+
+    private void setBalances(final User user) {
+        balanceService.addBalancesToAccounts(user);
     }
 }

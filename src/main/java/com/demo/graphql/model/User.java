@@ -10,9 +10,9 @@ import java.util.List;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class User {
-    private String userType;
-    private int age;
+    private final String userType;
+    private final int age;
 
     private int numberOfAccounts;
-    private final List<Account> accounts;
+    private List<Account> accounts;
 }

@@ -3,7 +3,6 @@ package com.demo.graphql.backends;
 import com.demo.graphql.model.User;
 import com.demo.graphql.model.UserType;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class UserInformation {
@@ -18,7 +17,7 @@ public class UserInformation {
             Thread.currentThread().interrupt();
         }
 
-        return new User(UserType.CUSTOMER.name(), getRandomAge(), 0, new ArrayList<>());
+        return new User(UserType.CUSTOMER.name(), getRandomAge());
     }
 
     private static int getRandomAge() {

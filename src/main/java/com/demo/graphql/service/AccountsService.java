@@ -17,7 +17,7 @@ public class AccountsService {
 
         List<Account> accounts = getAccountsList(accountIds);
 
-        user.getAccounts().addAll(accounts);
+        user.setAccounts(accounts);
         user.setNumberOfAccounts(accounts.size());
     }
 
